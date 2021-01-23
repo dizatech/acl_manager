@@ -18,4 +18,8 @@ Route::group([
             ->only(['index', 'edit', 'update']);
 
     });
+    Route::namespace('User')->group(function (){
+        Route::resource('users', 'UserController')
+            ->except(['index', 'show']);
+    });
 });
