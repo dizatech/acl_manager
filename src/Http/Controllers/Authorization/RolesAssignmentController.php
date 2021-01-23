@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Panel\Authorization;
+namespace Dizatech\AclManager\Http\Controllers\Authorization;
 
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -33,7 +33,7 @@ class RolesAssignmentController
             ? $userModel::search($request->keyword)->paginate()
             : $userModel::query()->paginate();
 
-        return View::make('panel.authorization.roles-assignment.index', [
+        return View::make('aclManager::authorization.roles-assignment.index', [
             'models' => array_keys(Config::get('laratrust.user_models')),
             'modelKey' => 'users',
             'users' => $users,
@@ -74,7 +74,7 @@ class RolesAssignmentController
         }
 
 
-        return View::make('panel.authorization.roles-assignment.edit', [
+        return View::make('aclManager::authorization.roles-assignment.edit', [
             'modelKey' => $modelKey,
             'roles' => $roles,
             'permissions' => $this->assignPermissions ? $permissions : null,

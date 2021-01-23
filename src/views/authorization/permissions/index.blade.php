@@ -80,9 +80,8 @@
                                 @endforelse
                             @endslot
                         @endcomponent
-
                         {{--Paginate section--}}
-                        {{ $permissions->links() }}
+                            {{ $permissions->withQueryString()->links('vendor.pagination.bootstrap-4') }}
                     @endslot
                 @endcomponent
             </div>

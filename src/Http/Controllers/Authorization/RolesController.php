@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Panel\Authorization;
+namespace Dizatech\AclManager\Http\Controllers\Authorization;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -21,7 +21,7 @@ class RolesController
 
     public function index()
     {
-        return View::make('panel.authorization.roles.index', [
+        return View::make('aclManager::authorization.roles.index', [
             'roles' => $this->rolesModel::withCount('permissions')
                 ->simplePaginate(10),
         ]);
@@ -29,7 +29,7 @@ class RolesController
 
     public function create()
     {
-        return View::make('panel.authorization.edit', [
+        return View::make('aclManager::authorization.edit', [
             'model' => null,
             'permissions' => $this->permissionModel::all(['id', 'name']),
             'type' => 'role',
@@ -65,7 +65,7 @@ class RolesController
                 return $permission;
             });
 
-        return View::make('panel.authorization.edit', [
+        return View::make('aclManager::authorization.edit', [
             'model' => $role,
             'permissions' => $permissions,
             'type' => 'role',
