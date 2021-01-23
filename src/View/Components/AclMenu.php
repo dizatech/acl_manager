@@ -5,7 +5,7 @@ namespace Dizatech\AclManager\View\Components;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class Menu extends Component
+class AclMenu extends Component
 {
     /**
      * The type of menu, modules or manager
@@ -20,6 +20,6 @@ class Menu extends Component
 
     public function render()
     {
-        return view('moduleMenu::components.menu');
+        return view('aclManager::components.acl_menu');
     }
 }

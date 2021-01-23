@@ -2,7 +2,7 @@
 
 namespace Dizatech\AclManager;
 
-use Dizatech\AclManager\View\Components\Menu;
+use Dizatech\AclManager\View\Components\AclMenu;
 use Illuminate\Support\ServiceProvider;
 
 class AclManagerServiceProvider extends ServiceProvider
@@ -32,7 +32,7 @@ class AclManagerServiceProvider extends ServiceProvider
             __DIR__.'/config/acl-manager.php' =>config_path('acl-manager')
         ], 'acl-manager');
         $this->loadViewComponentsAs('', [
-            Menu::class
+            AclMenu::class
         ]);
     }
 }
