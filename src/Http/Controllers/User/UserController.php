@@ -13,7 +13,7 @@ class UserController extends Controller
     public function create()
     {
         $provinces = Province::all();
-        return view('aclManager::users.create', compact('provinces'));
+        return view('vendor.AclManager.users.create', compact('provinces'));
     }
 
     public function store(UserRequest $request , User $user)

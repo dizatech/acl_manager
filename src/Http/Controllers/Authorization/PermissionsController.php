@@ -19,14 +19,14 @@ class PermissionsController
 
     public function index()
     {
-        return View::make('aclManager::authorization.permissions.index', [
+        return View::make('vendor.AclManager.authorization.permissions.index', [
             'permissions' => $this->permissionModel::simplePaginate(10),
         ]);
     }
 
     public function create()
     {
-        return View::make('aclManager::authorization.edit', [
+        return View::make('vendor.AclManager.authorization.edit', [
             'model' => null,
             'type' => 'permission',
         ]);
@@ -50,7 +50,7 @@ class PermissionsController
     {
         $permission = $this->permissionModel::findOrFail($id);
 
-        return View::make('aclManager::authorization.edit', [
+        return View::make('vendor.AclManager.authorization.edit', [
             'model' => $permission,
             'type' => 'permission',
         ]);
