@@ -11,12 +11,16 @@ packagist : `not available yet`
 
 ## Usage
 
-* Add the user modal namespace to laratrust config 
+* Change the user modal namespace to laratrust config 
   (located in /config/laratrust.php) in `user_models` section :
 
 `'user_models' => [
 'users' => 'App\Models\User',
 ],`
+
+* Publish blade files
+
+`php artisan vendor:publish --tag=acl-manager`
 
 * Add the following tag in your sidebar layout :
 
