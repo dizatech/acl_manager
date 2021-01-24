@@ -39,9 +39,11 @@ class RolesController
     public function store(Request $request)
     {
         $data = $request->validate([
-            'name' => 'required|string|unique:roles,name',
+            'name' => 'required|username|unique:roles,name',
             'display_name' => 'nullable|string',
             'description' => 'nullable|string',
+        ],[
+            'name.username' => 'فیلد نام میتواند شامل حروف انگلیسی، اعداد و ـ می تواند باشد'
         ]);
 
         $role = $this->rolesModel::create($data);

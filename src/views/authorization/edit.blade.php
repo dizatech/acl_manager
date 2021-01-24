@@ -29,6 +29,7 @@
                                 @method('PUT')
                             @endif
                             <div class="form-group">
+                                <span class="text-danger">*</span>
                                 <label for="name"><strong>نام</strong></label>
                                 <input
                                     class="form-control @error('name') is-invalid @enderror"

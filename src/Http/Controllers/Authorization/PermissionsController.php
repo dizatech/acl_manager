@@ -35,9 +35,11 @@ class PermissionsController
     public function store(Request $request)
     {
         $data = $request->validate([
-            'name' => 'required|string|unique:permissions,name',
+            'name' => 'required|username|unique:permissions,name',
             'display_name' => 'nullable|string',
             'description' => 'nullable|string',
+        ],[
+            'name.username' => 'فیلد نام میتواند شامل حروف انگلیسی، اعداد و ـ می تواند باشد'
         ]);
 
         $this->permissionModel::create($data);
