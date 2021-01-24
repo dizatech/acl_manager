@@ -22,6 +22,11 @@ packagist : `not available yet`
 
 `php artisan vendor:publish --tag=acl-manager`
 
+** Please note if you already published the vendor, for updates you can run the 
+following command :
+
+`php artisan vendor:publish --tag=acl-manager --force`
+
 * Add the following tag in your sidebar layout :
 
 `<x-acl-menu></x-acl-menu>`

@@ -62,15 +62,10 @@
                                         <td class="d-flex">
                                             <a href="{{route('roles.edit', $role->id)}}"
                                                class="btn btn-sm btn-primary mr-2">ویرایش</a>
-                                            <form
-                                                action="{{route('roles.destroy', $role->id)}}"
-                                                method="POST"
-                                                onsubmit="return confirm('آیا مطمئن هستید؟');"
-                                            >
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-sm btn-danger">حذف</button>
-                                            </form>
+                                            <a  href="#"
+                                                class="btn btn-sm btn-danger destroy_ajax" data-id="{{$role->id}}">
+                                                حذف
+                                            </a>
                                         </td>
                                     </tr>
                                 @empty
@@ -83,7 +78,7 @@
                         @endcomponent
 
                         {{--Paginate section--}}
-                        {{ $roles->links() }}
+                        {{ $roles->withQueryString()->links() }}
                     @endslot
                 @endcomponent
             </div>
@@ -93,6 +88,59 @@
     @endslot
 
     @slot('script')
+        <script>
+            $(".destroy_ajax").on('click', function (e) {
+                e.preventDefault();
+                let id = $(this).data('id');
+                Swal.fire({
+                    title: 'آیا برای حذف اطمینان دارید؟',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    customClass: {
+                        confirmButton: 'btn btn-danger mx-2',
+                        cancelButton: 'btn btn-light mx-2'
+                    },
+                    buttonsStyling: false,
+                    confirmButtonText: 'حذف',
+                    cancelButtonText: 'لغو',
+                    showClass: {
+                        popup: 'animated fadeInDown'
+                    },
+                    hideClass: {
+                        popup: 'animated fadeOutUp'
+                    }
+                })
+                    .then((result) => {
+                        if (result.isConfirmed) {
+                            $.ajax({
+                                type: "delete",
+                                url: baseUrl + '/panel/roles/' + id,
+                                dataType: 'json',
+                                success: function (response) {
+                                    Swal.fire({
+                                        icon: 'success',
+                                        text: 'عملیات حذف با موفقیت انجام شد.',
+                                        confirmButtonText:'تایید',
+                                        customClass: {
+                                            confirmButton: 'btn btn-success',
+                                        },
+                                        buttonsStyling: false,
+                                        showClass: {
+                                            popup: 'animated fadeInDown'
+                                        },
+                                        hideClass: {
+                                            popup: 'animated fadeOutUp'
+                                        }
+                                    })
+                                        .then((response) => {
+                                            location.reload();
+                                        });
+                                }
+                            });
+                        }
+                    });
+            });
+        </script>
     @endslot
 
 @endcomponent

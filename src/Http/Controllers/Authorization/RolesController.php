@@ -101,6 +101,6 @@ class RolesController
             $this->rolesModel::destroy($id);
         }
 
-        return redirect(route('roles.index'));
+        return response()->json(['status' => 'با موفقیت حذف شد']);
     }
 }

@@ -84,6 +84,6 @@ class PermissionsController
             $this->permissionModel::destroy($id);
         }
 
-        return redirect(route('permissions.index'));
+        return response()->json(['status' => 'با موفقیت حذف شد']);
     }
 }
