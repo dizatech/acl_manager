@@ -5,9 +5,9 @@ laravel apps.
 ## Installation
 Using Composer :
 
-`not available yet`
+`composer require dizatech/acl-manager`
 
-packagist : `not available yet`
+packagist : `https://packagist.org/packages/dizatech/acl-manager`
 
 ## Usage
 
