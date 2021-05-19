@@ -234,36 +234,6 @@
                                     </div>
 
                                     <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="commission"><strong>درصد کارمزد تمادکالا</strong></label>
-                                                <input id="commission" name="commission"
-                                                       class="form-control @error('commission') is-invalid @enderror"
-                                                       value="{{ old('commission') }}">
-                                                @error('commission')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="interest"><strong>درصد سود تمادکالا</strong></label>
-                                                <input id="interest" name="interest"
-                                                       class="form-control @error('interest') is-invalid @enderror"
-                                                       value="{{ old('interest') }}">
-                                                @error('interest')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <div class="form-group">

@@ -29,6 +29,7 @@ class UserRequest extends FormRequest
             'last_name' => ['required'],
             'mobile' => ['required', 'mobile'],
             'nid' => ['nullable','national_code'],
+            'status' => ['required','in:verified,not_verified'],
             'postal_code' => ['nullable','postal_code'],
             'password' => ( request()->isMethod('PATCH') && request()->has('id') ) ? ['nullable'] : ['required', 'min:8'],
             'username' => ( request()->isMethod('PATCH') && request()->has('id') )
@@ -53,6 +54,7 @@ class UserRequest extends FormRequest
             'username.username' => 'نام کاربری باید فقط شامل کاراکترهای انگلیسی باشد.',
             'postal_code.postal_code' => 'کدپستی معتبر وارد کنید.',
             'nid.national_code' => 'کدملی معتبر وارد کنید.',
+            'status.required' => 'وضعیت را انتخاب کنید.',
         ];
     }
 }

@@ -21,5 +21,8 @@ Route::group([
     Route::namespace('User')->group(function (){
         Route::resource('users', 'UserController')
             ->except(['index', 'show']);
+        Route::get('/user/search/ajax', 'UserController@searchAjax')->name('user.search_ajax');
+        Route::get('/users/reset/password/{user}', 'UserController@userResetPasswordForm')->name('user.reset_password');
+        Route::post('/users/reset/password/{user}', 'UserController@userResetPassword'); //
     });
 });
