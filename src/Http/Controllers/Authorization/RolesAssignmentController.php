@@ -51,10 +51,10 @@ class RolesAssignmentController
         }
 
         $user = $userModel::query()
-            ->with(['roles:id,name', 'permissions:id,name'])
+            ->with(['roles:id,name,display_name', 'permissions:id,name,display_name'])
             ->findOrFail($modelId);
 
-        $roles = $this->rolesModel::all(['id', 'name'])
+        $roles = $this->rolesModel::all(['id', 'name','display_name'])
             ->map(function ($role) use ($user) {
                 $role->assigned = $user->roles
                     ->pluck('id')
@@ -63,7 +63,7 @@ class RolesAssignmentController
                 return $role;
             });
         if ($this->assignPermissions) {
-            $permissions = $this->permissionModel::all(['id', 'name'])
+            $permissions = $this->permissionModel::all(['id', 'name','display_name'])
                 ->map(function ($permission) use ($user) {
                     $permission->assigned = $user->permissions
                         ->pluck('id')
@@ -98,7 +98,7 @@ class RolesAssignmentController
             $user->syncPermissions($request->get('permissions') ?? []);
         }
 
-        Session::flash('laratrust-success', 'Roles and permissions assigned successfully');
+        Session()->flash('success', 'کاربر باموفقیت بروزرسانی شد.');
         return redirect(route('roles-assignment.index', ['model' => $modelKey]));
     }
 }

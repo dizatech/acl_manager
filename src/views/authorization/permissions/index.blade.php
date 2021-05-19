@@ -16,67 +16,71 @@
     @slot('content')
         <div class="row">
             <div class="col-md-12">
-                @component('components.collapse-card', ['title' => 'لیست دسترسی‌ها'])
-                    @slot('body')
-                        @component('components.collapse-search')
-                            @slot('form')
-                                <form class="clearfix">
-                                    <div class="form-group">
-                                        <label for="text-name-input">نام کاربر</label>
-                                        <input type="text" class="form-control" id="text-name-input" placeholder="نام کاربر">
-                                    </div>
-                                    <button type="submit" class="btn btn-primary float-left">جستجو</button>
-                                </form>
+                @component('components.accordion')
+                    @slot('cards')
+                        @component('components.collapse-card', ['id' => 'permission_index', 'show' => 'show', 'title' => 'لیست دسترسی‌ها'])
+                            @slot('body')
+                                @component('components.collapse-search')
+                                    @slot('form')
+                                        <form class="clearfix">
+                                            <div class="form-group">
+                                                <label for="text-name-input">نام کاربر</label>
+                                                <input type="text" class="form-control" id="text-name-input" placeholder="نام کاربر">
+                                            </div>
+                                            <button type="submit" class="btn btn-primary float-left">جستجو</button>
+                                        </form>
+                                    @endslot
+                                @endcomponent
+
+                                <div class="mt-4">
+                                    <a href={{ route('permissions.create') }} type="button" class="btn btn-primary"><i class="fa fa-plus"></i> ایجاد دسترسی</a>
+                                </div>
+
+                                @component('components.table')
+                                    @slot('thead')
+                                        <tr>
+                                            <th>شناسه</th>
+                                            <th>نام</th>
+                                            <th>برچسب</th>
+                                            <th>توضیحات</th>
+                                            <th>فعالیت</th>
+                                        </tr>
+                                    @endslot
+                                    @slot('tbody')
+                                        @forelse ($permissions as $permission)
+                                            <tr>
+                                                <td>
+                                                    {{$permission->id}}
+                                                </td>
+                                                <td>
+                                                    {{$permission->name}}
+                                                </td>
+                                                <td>
+                                                    {{$permission->display_name}}
+                                                </td>
+                                                <td>
+                                                    {{$permission->description}}
+                                                </td>
+                                                <td class="d-flex">
+                                                    <a href="{{route('permissions.edit', $permission->id)}}"
+                                                       class="btn btn-sm btn-primary mr-2">ویرایش</a>
+                                                    <a  href="#"
+                                                        class="btn btn-sm btn-danger destroy_ajax" data-id="{{$permission->id}}">
+                                                        حذف
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        @empty
+                                            <tr>
+                                                <td colspan="5" class="text-center">موردی برای نمایش وجود ندارد.</td>
+                                            </tr>
+                                        @endforelse
+                                    @endslot
+                                @endcomponent
+                                {{--Paginate section--}}
+                                {{ $permissions->withQueryString()->links() }}
                             @endslot
                         @endcomponent
-
-                        <div class="mt-4">
-                            <a href={{ route('permissions.create') }} type="button" class="btn btn-primary"><i class="fa fa-plus"></i> ایجاد دسترسی</a>
-                        </div>
-
-                        @component('components.table')
-                            @slot('thead')
-                                <tr>
-                                    <th>شناسه</th>
-                                    <th>نام</th>
-                                    <th>برچسب</th>
-                                    <th>توضیحات</th>
-                                    <th>فعالیت</th>
-                                </tr>
-                            @endslot
-                            @slot('tbody')
-                                @forelse ($permissions as $permission)
-                                    <tr>
-                                        <td>
-                                            {{$permission->id}}
-                                        </td>
-                                        <td>
-                                            {{$permission->name}}
-                                        </td>
-                                        <td>
-                                            {{$permission->display_name}}
-                                        </td>
-                                        <td>
-                                            {{$permission->description}}
-                                        </td>
-                                        <td class="d-flex">
-                                            <a href="{{route('permissions.edit', $permission->id)}}"
-                                               class="btn btn-sm btn-primary mr-2">ویرایش</a>
-                                            <a  href="#"
-                                                class="btn btn-sm btn-danger destroy_ajax" data-id="{{$permission->id}}">
-                                                حذف
-                                            </a>
-                                        </td>
-                                    </tr>
-                                @empty
-                                    <tr>
-                                        <td colspan="5" class="text-center">موردی برای نمایش وجود ندارد.</td>
-                                    </tr>
-                                @endforelse
-                            @endslot
-                        @endcomponent
-                        {{--Paginate section--}}
-                            {{ $permissions->withQueryString()->links() }}
                     @endslot
                 @endcomponent
             </div>
