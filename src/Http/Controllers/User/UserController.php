@@ -91,9 +91,8 @@ class UserController extends Controller
             'password' => 'required|min:8|confirmed',
         ]);
 
-        $user->fill([
-            'password' => Hash::make($request->password)
-        ])->save();
+        $user->password = Hash::make($request->password);
+        $user->save();
 
         session()->flash('success', 'کاربر گرامی رمز عبور با موفقیت بروزرسانی گردید.');
 
