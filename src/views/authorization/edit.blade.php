@@ -84,7 +84,7 @@
                                                                {!! $permission->assigned ? 'checked' : '' !!}
                                                                class="custom-control-input"
                                                                id="{{ 'permission'.$permission->id  }}">
-                                                        <label class="custom-control-label" for="{{ 'permission'.$permission->id  }}">{{$permission->name}}</label>
+                                                        <label class="custom-control-label" for="{{ 'permission'.$permission->id  }}">{{$permission->display_name}}</label>
                                                         {{--                                                    <div class="invalid-feedback">Example invalid feedback text</div>--}}
                                                     </div>
                                                 </div>

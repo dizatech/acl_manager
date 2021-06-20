@@ -58,7 +58,7 @@ class RolesController
         $role = $this->rolesModel::query()
             ->with('permissions:id')
             ->findOrFail($id);
-        $permissions = $this->permissionModel::all(['id', 'name'])
+        $permissions = $this->permissionModel::all(['id', 'name', 'display_name'])
             ->map(function ($permission) use ($role) {
                 $permission->assigned = $role->permissions
                     ->pluck('id')
