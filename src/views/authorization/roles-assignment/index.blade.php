@@ -41,6 +41,8 @@
                                             <th>شناسه</th>
                                             <th>نام</th>
                                             <th>نام خانوادگی</th>
+                                            <th>موبایل</th>
+                                            <th>ایمیل</th>
                                             <th># نقش‌ها</th>
                                             <th>فعالیت</th>
                                         </tr>
@@ -56,6 +58,12 @@
                                                 </td>
                                                 <td>
                                                     {{$user->last_name ?? '-'}}
+                                                </td>
+                                                <td>
+                                                    {{digitsToEastern($user->mobile) ?? '-'}}
+                                                </td>
+                                                <td>
+                                                    {{$user->email ?? '-'}}
                                                 </td>
                                                 <td>
                                                     {{ count($user->roles) > 0 ? implode(',',$user->roles->pluck('display_name')->toArray()) : '-' }}
