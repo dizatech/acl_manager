@@ -5,36 +5,48 @@ laravel apps.
 ## Installation
 Using Composer :
 
-`composer require dizatech/acl-manager`
+```bash
+composer require dizatech/acl-manager
+```
 
-packagist : `https://packagist.org/packages/dizatech/acl-manager`
+packagist : [acl-manager](https://packagist.org/packages/dizatech/acl-manager)
 
 ## Usage
 
 * Change the user modal namespace to laratrust config 
-  (located in /config/laratrust.php) in `user_models` section :
+  (located in `/config/laratrust.php`) in `user_models` section :
 
-`'user_models' => [
-'users' => 'App\Models\User',
-],`
+```php
+'user_models' => [
+    'users' => 'App\Models\User',
+],
+```
 
 * Publish blade files
 
-`php artisan vendor:publish --tag=acl-manager`
+```bash
+php artisan vendor:publish --tag=acl-manager
+```
 
 ** Please note if you already published the vendor, for updates you can run the 
 following command :
 
-`php artisan vendor:publish --tag=acl-manager --force`
+```bash
+php artisan vendor:publish --tag=acl-manager --force
+```
 
 * Add the following tag in your sidebar layout :
 
-`<x-acl-menu></x-acl-menu>`
+```html
+<x-acl-menu></x-acl-menu>
+```
 
 or shorten tag :
 
-`<x-acl-menu />`
+```html
+<x-acl-menu />
+```
 
 ## ChangeLog
 
-https://github.com/dizatech/acl_manager/wiki/ChangeLog
+[See ChangeLog](https://github.com/dizatech/acl_manager/wiki/ChangeLog)

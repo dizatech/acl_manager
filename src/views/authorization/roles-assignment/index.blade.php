@@ -58,8 +58,7 @@
                                                     {{$user->last_name ?? '-'}}
                                                 </td>
                                                 <td>
-                                                    {{--{{$user->roles_count}}--}}
-                                                    {{$user->roles->count()}}
+                                                    {{ count($user->roles) > 0 ? implode(',',$user->roles->pluck('display_name')->toArray()) : '-' }}
                                                 </td>
                                                 <td>
                                                     <a  href="{{route('roles-assignment.edit', ['roles_assignment' => $user->id, 'model' => $modelKey])}}"
