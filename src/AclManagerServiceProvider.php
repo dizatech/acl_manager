@@ -29,7 +29,7 @@ class AclManagerServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__ . '/views','aclManager');
         $this->mergeConfigFrom(__DIR__ . '/config/acl-manager.php', 'acl-manager');
         $this->publishes([
-            __DIR__.'/config/acl-manager.php' =>config_path('acl-manager'),
+            __DIR__.'/config/acl-manager.php' =>config_path('acl-manager.php'),
             __DIR__.'/views/' => resource_path('views/vendor/AclManager'),
         ], 'acl-manager');
         $this->loadViewComponentsAs('', [

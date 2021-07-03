@@ -42,8 +42,6 @@
                                             <th>نام</th>
                                             <th>نام خانوادگی</th>
                                             <th># نقش‌ها</th>
-                                            @if(config('laratrust.panel.assign_permisions_to_user'))
-                                                <th class="th"># دسترسی‌ها</th>@endif
                                             <th>فعالیت</th>
                                         </tr>
                                     @endslot
@@ -54,21 +52,15 @@
                                                     {{$user->getKey()}}
                                                 </td>
                                                 <td>
-                                                    {{$user->first_name ?? 'این جدول ستون first-name را ندارد.'}}
+                                                    {{$user->first_name ?? '-'}}
                                                 </td>
                                                 <td>
-                                                    {{$user->last_name ?? 'این جدول ستون last-name را ندارد.'}}
+                                                    {{$user->last_name ?? '-'}}
                                                 </td>
                                                 <td>
                                                     {{--{{$user->roles_count}}--}}
                                                     {{$user->roles->count()}}
                                                 </td>
-                                                @if(config('laratrust.panel.assign_permisions_to_user'))
-                                                    <td>
-                                                        {{--{{$user->permissions_count}}--}}
-                                                        {{$user->permissions->count()}}
-                                                    </td>
-                                                @endif
                                                 <td>
                                                     <a  href="{{route('roles-assignment.edit', ['roles_assignment' => $user->id, 'model' => $modelKey])}}"
                                                         class="btn btn-sm btn-primary">

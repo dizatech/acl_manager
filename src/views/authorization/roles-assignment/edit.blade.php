@@ -57,26 +57,28 @@
                                             @endforeach
                                         </div>
                                     </div>
-                                    @if ($permissions)
-                                        <p class="mb-2"><strong>دسترسی‌ها</strong></p>
-                                        <div class="mb-4">
-                                            <div class="row">
-                                                @foreach ($permissions as $permission)
-                                                    <div class="col-md-3 mb-2">
-                                                        <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox"
-                                                                   name="permissions[]"
-                                                                   value="{{$permission->id}}"
-                                                                   {!! $permission->assigned ? 'checked' : '' !!}
-                                                                   class="custom-control-input"
-                                                                   id="{{ 'permission'.$permission->id  }}">
-                                                            <label class="custom-control-label" for="{{ 'permission'.$permission->id  }}">{{$permission->display_name}}</label>
-                                                            {{--                                                    <div class="invalid-feedback">Example invalid feedback text</div>--}}
+                                    @if(auth()->user()->is_admin && auth()->user()->hasRole(['programmer']))
+                                        @if ($permissions)
+                                            <p class="mb-2"><strong>دسترسی‌ها</strong></p>
+                                            <div class="mb-4">
+                                                <div class="row">
+                                                    @foreach ($permissions as $permission)
+                                                        <div class="col-md-3 mb-2">
+                                                            <div class="custom-control custom-checkbox">
+                                                                <input type="checkbox"
+                                                                       name="permissions[]"
+                                                                       value="{{$permission->id}}"
+                                                                       {!! $permission->assigned ? 'checked' : '' !!}
+                                                                       class="custom-control-input"
+                                                                       id="{{ 'permission'.$permission->id  }}">
+                                                                <label class="custom-control-label" for="{{ 'permission'.$permission->id  }}">{{$permission->display_name}}</label>
+                                                                {{--                                                    <div class="invalid-feedback">Example invalid feedback text</div>--}}
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                @endforeach
+                                                    @endforeach
+                                                </div>
                                             </div>
-                                        </div>
+                                        @endif
                                     @endif
                                     <div>
                                         <button class="btn btn-success" type="submit">ثبت</button>
