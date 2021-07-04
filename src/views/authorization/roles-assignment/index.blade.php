@@ -69,19 +69,17 @@
                                                     {{ count($user->roles) > 0 ? implode(',',$user->roles->pluck('display_name')->toArray()) : '-' }}
                                                 </td>
                                                 <td>
-                                                    <a  href="{{route('roles-assignment.edit', ['roles_assignment' => $user->id, 'model' => $modelKey])}}"
-                                                        class="btn btn-sm btn-primary">
-                                                        ویرایش دسترسی
-                                                    </a>
-                                                    <a  href="{{route('users.edit', $user->id)}}"
-                                                        class="btn btn-sm btn-success">
-                                                        ویرایش اطلاعات
-                                                    </a>
-                                                    <a  href="{{route('user.reset_password', ['user' => $user->id])}}"
-                                                        class="btn btn-sm btn-info">
-                                                        ویرایش رمز عبور
-                                                    </a>
+                                                    <div class="dropdown show">
+                                                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            فعالیت
+                                                        </a>
 
+                                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                                            <a class="dropdown-item" href="{{route('roles-assignment.edit', ['roles_assignment' => $user->id, 'model' => $modelKey])}}">ویرایش دسترسی</a>
+                                                            <a class="dropdown-item" href="{{route('users.edit', $user->id)}}">ویرایش اطلاعات</a>
+                                                            <a class="dropdown-item" href="{{route('user.reset_password', ['user' => $user->id])}}">ویرایش رمز عبور</a>
+                                                        </div>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         @empty
