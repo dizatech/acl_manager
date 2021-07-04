@@ -19,12 +19,46 @@
                     @slot('cards')
                         @component('components.collapse-card', ['id' => 'role_assignment_index', 'show' => 'show', 'title' => 'لیست کاربران'])
                             @slot('body')
-                                @component('components.collapse-search')
+                                @component('components.collapse-search', ['show' => $show_filter])
                                     @slot('form')
-                                        <form class="clearfix">
-                                            <div class="form-group">
-                                                <label for="text-name-input">اطلاعات کاربر</label>
-                                                <input type="text" class="form-control" id="text-name-input" name="keyword" value="{{request('keyword')}}" placeholder="نام کاربر، نام کاربری، ایمیل، شماره ملی، شماره تلفن، شهر، آدرس، کدپستی">
+                                        <form class="clearfix" method="get">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label for="full_name">نام ونام خانوادگی</label>
+                                                        <input type="text" class="form-control" id="full_name" name="full_name" value="{{ request('full_name') }}">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label for="mobile">موبایل</label>
+                                                        <input type="text" class="form-control" id="mobile" name="mobile" value="{{ request('mobile') }}">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label for="email">ایمیل</label>
+                                                        <input type="text" class="form-control" id="email" name="email" value="{{ request('email') }}">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label for="role">نقش</label>
+                                                        <select name="role" id="role"
+                                                                class="form-control select2">
+                                                            <option value="">
+                                                                انتخاب کنید...
+                                                            </option>
+                                                            @foreach($roles as $role)
+                                                                <option value="{{ $role->name }}" {{ request('role') == $role->name ? 'selected' : ''}}>
+                                                                    {{ $role->display_name }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
                                             </div>
                                             <button type="submit" class="btn btn-primary float-left">جستجو</button>
                                         </form>
@@ -103,6 +137,11 @@
     @endslot
 
     @slot('script')
+        <script>
+            $('.select2').select2({
+                "theme": "bootstrap"
+            });
+        </script>
     @endslot
 
 @endcomponent

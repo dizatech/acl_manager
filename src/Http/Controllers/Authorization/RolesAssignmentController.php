@@ -29,14 +29,33 @@ class RolesAssignmentController
         $userModel::query()->withCount(['roles', 'permissions'])>paginate();
         */
         $userModel = Config::get('laratrust.user_models')['users'] ?? null;
-        $users = ($request->has('keyword') && $request->keyword != '')
-            ? $userModel::search($request->keyword)->paginate()
-            : $userModel::query()->paginate();
-
+        $roleModel = Config::get('laratrust.models')['role'] ?? null;
+        $roles = $roleModel::query()->get();
+        $users = $userModel::query();
+        $show_filter = 'false';
+        if ($request->has('full_name') && $request->full_name != ''){
+            $users = $users->whereRaw("concat_ws(' ', first_name, last_name) like ?", ['%'. $request->full_name . '%']);
+            $show_filter = 'true';
+        }
+        if ($request->has('email') && $request->email != ''){
+            $users = $users->whereRaw("email like ?", ['%'. $request->email . '%']);
+            $show_filter = 'true';
+        }
+        if ($request->has('mobile') && $request->mobile != ''){
+            $users = $users->whereRaw("mobile like ?", ['%'. $request->mobile . '%']);
+            $show_filter = 'true';
+        }
+        if ($request->has('role') && $request->role != ''){
+            $users = $users->whereRoleIs($request->role);
+            $show_filter = 'true';
+        }
+        $users = $users->paginate();
         return View::make('vendor.AclManager.authorization.roles-assignment.index', [
             'models' => array_keys(Config::get('laratrust.user_models')),
             'modelKey' => 'users',
             'users' => $users,
+            'show_filter' => $show_filter,
+            'roles' => $roles
         ]);
     }
 

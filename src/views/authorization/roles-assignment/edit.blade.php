@@ -9,6 +9,7 @@
     @endslot
 
     @slot('breadcrumb')
+        <li class="breadcrumb-item"><a href="{{ route('roles-assignment.index') }}">کاربران</a></li>
         <li class="breadcrumb-item">سطوح دسترسی</li>
     @endslot
 
@@ -21,8 +22,7 @@
                             @slot('body')
                                 <form
                                     method="POST"
-                                    action="{{route('roles-assignment.update', ['roles_assignment' => $user->id, 'model' => $modelKey])}}"
-                                >
+                                    action="{{route('roles-assignment.update', ['roles_assignment' => $user->id, 'model' => $modelKey])}}">
                                     @csrf
                                     @method('PUT')
                                     <div class="form-group">
