@@ -3,6 +3,7 @@
 namespace Dizatech\AclManager\Http\Controllers\Authorization;
 
 use App\Models\User;
+use Dizatech\AclManager\Events\RoleUserUpdateEvent;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Config;
@@ -117,7 +118,8 @@ class RolesAssignmentController
             $user->syncPermissions($request->get('permissions') ?? []);
         }
 
+        RoleUserUpdateEvent::dispatch($user);
         Session()->flash('success', 'کاربر باموفقیت بروزرسانی شد.');
-        return redirect(route('roles-assignment.index', ['model' => $modelKey]));
+        return redirect()->back();
     }
 }
