@@ -34,23 +34,23 @@ class RolesAssignmentController
         $roles = $roleModel::query()->get();
         $users = $userModel::query();
         $show_filter = 'false';
-        if ($request->has('full_name') && $request->full_name != ''){
-            $users = $users->whereRaw("concat_ws(' ', first_name, last_name) like ?", ['%'. $request->full_name . '%']);
-            $show_filter = 'true';
+        if ($request->has('fullname') && $request->fullname){
+            $users = $users->whereRaw('CONCAT( first_name, " ", last_name ) like ?', "%{$request->fullname}%");
         }
-        if ($request->has('email') && $request->email != ''){
-            $users = $users->whereRaw("email like ?", ['%'. $request->email . '%']);
-            $show_filter = 'true';
-        }
-        if ($request->has('mobile') && $request->mobile != ''){
-            $users = $users->whereRaw("mobile like ?", ['%'. $request->mobile . '%']);
-            $show_filter = 'true';
-        }
-        if ($request->has('role') && $request->role != ''){
-            $users = $users->whereRoleIs($request->role);
-            $show_filter = 'true';
-        }
+        // if ($request->has('email') && $request->email != ''){
+        //     $users = $users->whereRaw("email like ?", ['%'. $request->email . '%']);
+        //     $show_filter = 'true';
+        // }
+        // if ($request->has('mobile') && $request->mobile != ''){
+        //     $users = $users->whereRaw("mobile like ?", ['%'. $request->mobile . '%']);
+        //     $show_filter = 'true';
+        // }
+        // if ($request->has('role') && $request->role != ''){
+        //     $users = $users->whereRoleIs($request->role);
+        //     $show_filter = 'true';
+        // }
         $users = $users->paginate();
+
         return View::make('vendor.AclManager.authorization.roles-assignment.index', [
             'models' => array_keys(Config::get('laratrust.user_models')),
             'modelKey' => 'users',
