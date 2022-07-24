@@ -41,10 +41,9 @@ class RolesAssignmentController
         //     $users = $users->whereRaw("email like ?", ['%'. $request->email . '%']);
         //     $show_filter = 'true';
         // }
-        // if ($request->has('mobile') && $request->mobile != ''){
-        //     $users = $users->whereRaw("mobile like ?", ['%'. $request->mobile . '%']);
-        //     $show_filter = 'true';
-        // }
+        if ($request->has('mobile') && $request->mobile != ''){
+            $users = $users->where('mobile',  $request->mobile);
+        }
         // if ($request->has('role') && $request->role != ''){
         //     $users = $users->whereRoleIs($request->role);
         //     $show_filter = 'true';
