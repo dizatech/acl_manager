@@ -14,7 +14,7 @@
         "php": "7.1.*|7.2.*|7.3.*|7.4.*|8.*",
         "laravel/framework": "7.*|8.*|9.*",
         "santigarcor/laratrust": "6.*|7.*",
-        "va/cutlet-helper": "1.*"
+        "dizatech/cutlet-helper": "1.*"
     },
     "autoload": {
         "psr-4": {
